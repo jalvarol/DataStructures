@@ -29,9 +29,9 @@ public class List<T extends Comparable<T>> {
 	/**
 	 * Instantiates a new doubly linked List with default values
 	 * 
-	 * @postcondition first, last, and 
-	 * iterator will contain null and 
-	 * length will be set to zero
+	 * @postcondition first, last, and
+	 *                iterator will contain null and
+	 *                length will be set to zero
 	 */
 	public List() {
 		first = last = iterator = null;
@@ -66,143 +66,134 @@ public class List<T extends Comparable<T>> {
 
 	/**** ACCESSORS ****/
 	/**
-     * Uses the iterative linear search
-     * algorithm to locate a specific
-     * element in the list
-     * @param element the value to search for
-     * @return the location of value in the
-     * List or -1 to indicate not found
-     * Note that if the List is empty we will
-     * consider the element to be not found
-     * @postcondition: position of the iterator remains
-     * unchanged!
-     */
-    public int linearSearch(T element) {
-    	Node temp = first;
-    	for(int i = 1; i<=length;i++)
-    	{
-    		if(temp.data == element)
-    		{
-    			return i;
-    		}
-    		temp = temp.next;
-    	}
-        return -1;
-    }
-    /**
-     * Returns the index from 1 to length
-     * where value is located in the List
-     * by calling the private helper method
-     * binarySearch
-     * @param value the value to search for
-     * @return the index where value is
-     * stored from 1 to length, or -1 to
-     * indicate not found
-     * @precondition isSorted()
-     * @postcondition the position of the
-     * iterator must remain unchanged!
-     * @throws IllegalStateException when the
-     * precondition is violated.
-     */
-    public int binarySearch(T value) throws IllegalStateException {
-    	if(!inSortedOrder())
-    	{
-    		throw new IllegalStateException("binarySearch(): List is not sorted!");
-    	}
-    	else
-    		return binarySearch(1,length,value);	
-    }
-   
-    /**
-     * Searches for the specified value in
-     * the List by implementing the recursive
-     * binarySearch algorithm
-     * @param low the lowest bounds of the search
-     * @param high the highest bounds of the search
-     * @param value the value to search for
-     * @return the index at which value is located
-     * or -1 to indicate not found
-     * @postcondition the location of the iterator
-     * must remain unchanged
-     */
-    private int binarySearch(int low, int high, T value) 
-    {
-    	if(high < low)
-    		return -1;    	
-    	int mid = low +(high-low)/2;
-    	Node temp = first;
-    	int i = 1;
-    	while(i < mid)
-    	{
-    		temp = temp.next;
-    		i++;
-    	}
-    	if(value.compareTo(temp.data)==0)
-    	{
-    		return mid;
-    	}
-    	else if(value.compareTo(temp.data)<0)
-    		return binarySearch(low,mid-1,value);
-    	else
-    		return binarySearch(mid+1,high,value);
-    } 
+	 * Uses the iterative linear search
+	 * algorithm to locate a specific
+	 * element in the list
+	 * 
+	 * @param element the value to search for
+	 * @return the location of value in the
+	 *         List or -1 to indicate not found
+	 *         Note that if the List is empty we will
+	 *         consider the element to be not found
+	 * @postcondition: position of the iterator remains
+	 *                 unchanged!
+	 */
+	public int linearSearch(T element) {
+		Node temp = first;
+		for (int i = 1; i <= length; i++) {
+			if (temp.data == element) {
+				return i;
+			}
+			temp = temp.next;
+		}
+		return -1;
+	}
 
 	/**
-     * Returns the index of the iterator
-     * from 1 to n. Note that there is
-     * no index 0. Does not use recursion.
-     * @precondition iterator !offEnd()
-     * @return the index of the iterator
-     * @throws NullPointerException when
-     * the precondition is violated
-     */
-    public int getIndex() throws NullPointerException{
+	 * Returns the index from 1 to length
+	 * where value is located in the List
+	 * by calling the private helper method
+	 * binarySearch
+	 * 
+	 * @param value the value to search for
+	 * @return the index where value is
+	 *         stored from 1 to length, or -1 to
+	 *         indicate not found
+	 * @precondition isSorted()
+	 * @postcondition the position of the
+	 *                iterator must remain unchanged!
+	 * @throws IllegalStateException when the
+	 *                               precondition is violated.
+	 */
+	public int binarySearch(T value) throws IllegalStateException {
+		if (!inSortedOrder()) {
+			throw new IllegalStateException("binarySearch(): List is not sorted!");
+		} else
+			return binarySearch(1, length, value);
+	}
 
-    	if(offEnd())
-        {
-        	throw new NullPointerException("getIndex(): Iterator is offEnd!");
-        }
-        else 
-        {	
-        		Node temp = this.iterator;	
-        		int index=0;
-        		while(temp != null)
-        		{
-        			temp = temp.prev;
-        			index++;
-        		}
-        	return index;
-        }
-    }
+	/**
+	 * Searches for the specified value in
+	 * the List by implementing the recursive
+	 * binarySearch algorithm
+	 * 
+	 * @param low   the lowest bounds of the search
+	 * @param high  the highest bounds of the search
+	 * @param value the value to search for
+	 * @return the index at which value is located
+	 *         or -1 to indicate not found
+	 * @postcondition the location of the iterator
+	 *                must remain unchanged
+	 */
+	private int binarySearch(int low, int high, T value) {
+		if (high < low)
+			return -1;
+		int mid = low + (high - low) / 2;
+		Node temp = first;
+		for (int i = 1; i < mid; i++) {
+			temp = temp.next;
+		}
+		if (value.compareTo(temp.data) == 0) {
+			return mid;
+		} else if (value.compareTo(temp.data) < 0)
+			return binarySearch(low, mid - 1, value);
+		else
+			return binarySearch(mid + 1, high, value);
+	}
+
+
+	/**
+	 * Returns the index of the iterator
+	 * from 1 to n. Note that there is
+	 * no index 0. Does not use recursion.
+	 * 
+	 * @precondition iterator !offEnd()
+	 * @return the index of the iterator
+	 * @throws NullPointerException when
+	 *                              the precondition is violated
+	 */
+	public int getIndex() throws NullPointerException {
+
+		if (offEnd()) {
+			throw new NullPointerException("getIndex(): Iterator is offEnd!");
+		} else {
+			Node temp = this.iterator;
+			int index = 0;
+			while (temp != null) {
+				temp = temp.prev;
+				index++;
+			}
+			return index;
+		}
+	}
+
 	/**
 	 * Determines whether a List is sorted by calling its recursive helper method
 	 * isSorted Note: An empty List can be considered to be (trivially) sorted
+	 * 
 	 * @return whether this List is sorted
 	 */
 	public boolean inSortedOrder() {
 		Node temp = first;
 		return inSortedOrder(temp);
 	}
+
 	/**
 	 * Helper method to inSortedOrder Determines whether a List is sorted in
 	 * ascending order recursively
 	 * 
 	 * @return whether this List is sorted
 	 */
-    private boolean inSortedOrder(Node n) 
-    {
-    	if(n.next == null)
-    	{
-    		return true;
-    	}
-    	else if(n.data.compareTo(n.next.data)>0)
-    	{
-    		return false;
-    	} else 
-    	{
-    		return inSortedOrder(n.next);
-    	}
-    }
+	private boolean inSortedOrder(Node n) {
+		if (n.next == null) {
+			return true;
+		} else if (n.data.compareTo(n.next.data) > 0) {
+			return false;
+		} else {
+			return inSortedOrder(n.next);
+		}
+	}
+
 	/**
 	 * Returns the value stored in the first node
 	 * 
@@ -217,6 +208,7 @@ public class List<T extends Comparable<T>> {
 		}
 		return first.data;
 	}
+
 	/**
 	 * Returns the value stored in the last node
 	 * 
@@ -232,6 +224,7 @@ public class List<T extends Comparable<T>> {
 		}
 		return last.data;
 	}
+
 	/**
 	 * Returns the current length of the list
 	 * 
@@ -240,6 +233,7 @@ public class List<T extends Comparable<T>> {
 	public int getLength() {
 		return length;
 	}
+
 	/**
 	 * Returns the element currently pointed at by the iterator
 	 * 
@@ -254,6 +248,7 @@ public class List<T extends Comparable<T>> {
 		}
 		return iterator.data;
 	}
+
 	/**
 	 * Returns whether the list is currently empty
 	 * 
@@ -262,6 +257,7 @@ public class List<T extends Comparable<T>> {
 	public boolean isEmpty() {
 		return length == 0;
 	}
+
 	/**
 	 * Returns whether or not the iterator is off the end of the List, i.e. null
 	 * 
@@ -270,30 +266,30 @@ public class List<T extends Comparable<T>> {
 	public boolean offEnd() {
 		return iterator == null;
 	}
+
 	/**** MUTATORS ****/
 	/**
-     * Places the iterator at first
-     * and then iteratively advances
-     * it to the specified index
-     * no recursion
-     * @param index the index where
-     * the iterator should be placed
-     * @precondition 1 <= index <= length
-     * @throws IndexOutOfBoundsException
-     * when precondition is violated
-     */
-    public void advanceToIndex(int index) throws IndexOutOfBoundsException{
-        if(1 > index || index>this.length)
-        {
-        	throw new IndexOutOfBoundsException("AdvanceToIndex(): Index out of bounds!");
-        }
-        else
-        	placeIterator();
-        	for(int i = 1; i < index; i++)
-        	{
-        		advanceIterator();
-        	}
-    }
+	 * Places the iterator at first
+	 * and then iteratively advances
+	 * it to the specified index
+	 * no recursion
+	 * 
+	 * @param index the index where
+	 *              the iterator should be placed
+	 * @precondition 1 <= index <= length
+	 * @throws IndexOutOfBoundsException
+	 *                                   when precondition is violated
+	 */
+	public void advanceToIndex(int index) throws IndexOutOfBoundsException {
+		if (1 > index || index > this.length) {
+			throw new IndexOutOfBoundsException("AdvanceToIndex(): Index out of bounds!");
+		} else
+			placeIterator();
+		for (int i = 1; i < index; i++) {
+			advanceIterator();
+		}
+	}
+
 	/**
 	 * Creates a new first element
 	 * 
@@ -314,6 +310,7 @@ public class List<T extends Comparable<T>> {
 		}
 		length++;
 	}
+
 	/**
 	 * Creates a new last element
 	 * 
@@ -334,6 +331,7 @@ public class List<T extends Comparable<T>> {
 		}
 		length++;
 	}
+
 	/**
 	 * Inserts new data in the List after the iterator
 	 * 
@@ -359,6 +357,7 @@ public class List<T extends Comparable<T>> {
 			length++;
 		}
 	}
+
 	/**
 	 * Moves the iterator to the start of the List
 	 * 
@@ -370,6 +369,7 @@ public class List<T extends Comparable<T>> {
 		} else
 			iterator = first;
 	}
+
 	/**
 	 * Removes data in the List
 	 * 
@@ -396,6 +396,7 @@ public class List<T extends Comparable<T>> {
 		}
 		iterator = null;
 	}
+
 	/**
 	 * Advances the iterator by one node in the List
 	 * 
@@ -408,6 +409,7 @@ public class List<T extends Comparable<T>> {
 		}
 		iterator = iterator.next;
 	}
+
 	/**
 	 * Reverse the iterator by one node
 	 * 
@@ -420,6 +422,7 @@ public class List<T extends Comparable<T>> {
 		}
 		iterator = iterator.prev;
 	}
+
 	/**
 	 * removes the element at the front of the list
 	 * 
@@ -439,6 +442,7 @@ public class List<T extends Comparable<T>> {
 		length--;
 
 	}
+
 	/**
 	 * removes the element at the end of the list
 	 * 
@@ -457,6 +461,7 @@ public class List<T extends Comparable<T>> {
 		}
 		length--;
 	}
+
 	/**** ADDITIONAL OPERATIONS ****/
 	/**
 	 * List with each value on its own line At the end of the List a new line
@@ -473,6 +478,7 @@ public class List<T extends Comparable<T>> {
 		}
 		return result;
 	}
+
 	/** Additional Operations */
 	/**
 	 * Prints a linked list to the console in reverse by calling the private
@@ -482,22 +488,21 @@ public class List<T extends Comparable<T>> {
 		Node temp = last;
 		printInReverse(temp);
 	}
+
 	/**
 	 * Recursively prints a linked list to the console in reverse order from last to
 	 * first (no loops) Each element separated by a space Should print a new line
 	 * after all elements have been displayed
 	 */
-	private void printInReverse(Node node)
-	{
-		if(node == null)
-		{
+	private void printInReverse(Node node) {
+		if (node == null) {
 			System.out.println();
 			return;
-		}
-		else 
-			System.out.printf(node.data+" ");
-			printInReverse(node.prev);
+		} else
+			System.out.printf(node.data + " ");
+		printInReverse(node.prev);
 	}
+
 	/**
 	 * Determines whether two Lists have the same data in the same order
 	 * 

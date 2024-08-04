@@ -119,20 +119,8 @@ public class List<T extends Comparable<T>> {
 			return -1;
 		int mid = low + (high - low) / 2;
 		Node temp = first;
-		int i = low;
-
-		if (high == getLength()) {
-			i = high;
-			temp = last;
-			while (i > mid) {
-				temp = temp.prev;
-				i--;
-			}
-		} else {
-			while (i < mid) {
-				temp = temp.next;
-				i++;
-			}
+		for (int i = 1; i < mid; i++) {
+			temp = temp.next;
 		}
 		if (value.compareTo(temp.data) == 0) {
 			return mid;
@@ -141,6 +129,7 @@ public class List<T extends Comparable<T>> {
 		else
 			return binarySearch(mid + 1, high, value);
 	}
+
 
 	/**
 	 * Returns the index of the iterator from 1 to n. Note that there is no index 0.

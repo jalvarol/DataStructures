@@ -118,27 +118,11 @@ public class List<T extends Comparable<T>> {
 		if (high < low)
 			return -1;
 		int mid = low + (high - low) / 2;
-		Node temp = first;	
-		int i = low;
-		if(high == getLength())
-		{
-			i = high;
-			temp = last;
-			while(i > mid)
-			{
-				temp = temp.prev;
-				i--;
-			}
+		Node temp = first;
+		for (int i = 1; i < mid; i++) {
+			temp = temp.next;
 		}
-		else
-		{
-			while(i < mid)
-			{
-				temp = temp.next;
-				i++;
-			}
-		}	
-		if (value.compareTo(temp.data)==0) {
+		if (value.compareTo(temp.data) == 0) {
 			return mid;
 		} else if (value.compareTo(temp.data) < 0)
 			return binarySearch(low, mid - 1, value);

@@ -11,7 +11,7 @@ public class BlockChain {
 		String lastName = "";
 		String line = "";
 		Block info = new Block();
-		List<Block> block = new List<>();
+		List <Block> block = new List<>();
 		FileReader file = new FileReader(filename);
 		BufferedReader buff = new BufferedReader(file);
 		boolean eof = false;
