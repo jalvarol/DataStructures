@@ -114,23 +114,15 @@ public void insert(T t) {
 * @param t the key to remove
 */
 public void remove(T t) 
-{
 	int index = hash(t);
-	if(t != null)
-	{
-		Table.get(index).placeIterator();		
-		while(!Table.get(index).offEnd())
+	int check = Table.get(index).linearSearch(t);
+	if(check != -1)
 		{
-			if(Table.get(index).getIterator().compareTo(t) ==0)
-			{
-				Table.get(index).removeIterator();
-				numElements--;
-				return;
-			}
-			Table.get(index).advanceIterator();
+			Table.get(index).placeIterator();
+			Table.get(index).advanceToIndex(check);
+			Table.get(index).removeIterator();
+			numElements--;
 		}
-	}
-
 }
 
 /**Additional Methods*/
