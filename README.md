@@ -1,4 +1,5 @@
 This is a brief overview of Abstract Data and Structures using Java. Each DS folder contains a topic with examples and multiple files to demonstrate the topic at hand. All folders contain JUnit testing with VSCode, you can use Junit Jupiter while setting up to run the junit test files. 
+To run these files, please select the individual data structure folders other wise there will be errors with JUnit testing. i.e. "Open Folder" -> "Select Graphs"
 
 **<p align="center">Singly Linked Lists</p>** Linked lists are a data structure where data is chained together using a series of references. A list needs to keep track of data items and references to the next item. In order to do this, lists are made of special objects called NODES. Nodes hold both data and a reference to the next Node in the list. Additionally, Linked lists are sized dynamically compared to arrays which are static. Linked lists also allow for comparative ease of insertion and deletion. Unfortunately, they do not allow for random access - need to scroll through the list item-by-item to find the element we're looking for.  
 
